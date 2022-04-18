@@ -4,7 +4,7 @@ namespace Food.Web.Services.IServices
 {
     public interface IBaseService:IDisposable
     {
-        ReponseDto reponseDto { get; set; }
+        ResponseDto responseModel { get; set; }
         Task<T> SendAsync<T>(APIRequest apiRequest);
         
     }
