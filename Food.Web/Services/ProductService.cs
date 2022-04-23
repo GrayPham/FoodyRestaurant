@@ -5,29 +5,62 @@ namespace Food.Web.Services
 {
     public class ProductService : BaseService, IProductServices
     {
-        public Task<T> CreateProductAsync<T>(ProductDto productDto)
+        private readonly IHttpClientFactory _httpClientFactory;
+        public ProductService(IHttpClientFactory httpClient) : base(httpClient)
         {
-            throw new NotImplementedException();
+            _httpClientFactory = httpClient;
         }
 
-        public Task<T> DeleteProductAsync<T>(int Id)
+        public async Task<T> CreateProductAsync<T>(ProductDto productDto)
         {
-            throw new NotImplementedException();
+            return await this.SendAsync<T>(new APIRequest()
+            {
+                ApiType = SD.ApiType.POST,
+                Data = productDto,
+                Url = SD.ProductAPIBase + "/api/products",
+                AccessToken = ""
+            }) ;
         }
 
-        public Task<T> GetAllProductsAsync<T>()
+        public async Task<T> DeleteProductAsync<T>(int Id)
         {
-            throw new NotImplementedException();
+            return await this.SendAsync<T>(new APIRequest()
+            {
+                ApiType = SD.ApiType.DELETE,
+                Url = SD.ProductAPIBase + "/api/products" + Id,
+                AccessToken = ""
+            });
         }
 
-        public Task<T> GetProductByIdAsync<T>(int Id)
+        public async Task<T> GetAllProductsAsync<T>()
         {
-            throw new NotImplementedException();
+            return await this.SendAsync<T>(new APIRequest()
+            {
+                ApiType = SD.ApiType.GET,
+                Url = SD.ProductAPIBase + "/api/products",
+                AccessToken = ""
+            });
         }
 
-        public Task<T> UpdateProductAsync<T>(ProductDto productDto)
+        public async Task<T> GetProductByIdAsync<T>(int Id)
         {
-            throw new NotImplementedException();
+            return await this.SendAsync<T>(new APIRequest()
+            {
+                ApiType = SD.ApiType.GET,
+                Url = SD.ProductAPIBase + "/api/products" + Id,
+                AccessToken = ""
+            });
+        } 
+
+        public async Task<T> UpdateProductAsync<T>(ProductDto productDto)
+        {
+            return await this.SendAsync<T>(new APIRequest()
+            {
+                ApiType = SD.ApiType.PUT,
+                Data = productDto,
+                Url = SD.ProductAPIBase + "/api/products",
+                AccessToken = ""
+            });
         }
     }
 }

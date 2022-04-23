@@ -1,6 +1,14 @@
+using Food.Web;
+using Food.Web.Services;
+using Food.Web.Services.IServices;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
+builder.Services.AddHttpClient<ProductService, ProductService>();
+SD.ProductAPIBase = Configuration["ServiceUrls:ProductAPI"];
+builder.Services.AddScoped<IProductServices, ProductService>();
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
