@@ -2,7 +2,7 @@
 
 namespace Food.Web.Services.IServices
 {
-    public interface IProductServices
+    public interface IProductServices:IBaseService
     {
         Task<T> GetAllProductsAsync<T>();
         Task<T> GetProductByIdAsync<T>(int Id);
