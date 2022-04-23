@@ -1,6 +1,6 @@
 ﻿namespace Food.Web.Models
 {
-    public class ReponseDto
+    public class ResponseDto
     {
         public bool IsSuccess { get; set; } = true;
         public object Result { get; set; }
